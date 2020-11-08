@@ -69,7 +69,16 @@ class Partie():
               auquel cas affecte True à l'attribut self.partie_terminee.
         """
         # TODO: À programmer.
-        pass
+        # On demande les coordonnée et on dévoile la case
+        rangee_x, colonne_y = self.demander_coordonnees_case_a_devoiler()
+        self.tableau_mines.devoiler_case(rangee_x, colonne_y)
+
+        if  self.tableau_mines.contient_mine(rangee_x, colonne_y):  #Aurait probablement pu aussi être fait avec self.partie_terminee =  self.tableau_mines.contient_mine(rangee_x, colonne_y) je ne sais pas ce qui est le mieux
+            self.partie_terminee = True
+
+        if self.tableau_mines.nombre_cases_sans_mine_a_devoiler == 0:
+            self.partie_terminee = True
+
         
     def valider_coordonnees(self, rangee_x, colonne_y):
         """
@@ -103,5 +112,10 @@ class Partie():
 
         """ 
         # TODO: À programmer.
-        pass
+
+        rangee, colonne = input('Entrer les coordonées (X_entier,Y_entier) de la case à dévoiler : ')
+
+        while not self.valider_coordonnees(rangee, colonne):
+            rangee, colonne = input('Les cordonnées entrée ne sont pas valides! \n Entrer les coordonées de la case à dévoiler : ')
+        return int(rangee), int(colonne)
 
