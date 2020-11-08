@@ -209,7 +209,7 @@ class Tableau():
                 else:
                     # Contenu d'une case
                     case_xy = self.obtenir_case(rangee_x, colonne_y)
-                    if case_xy.est_devoilee
+                    if case_xy.est_devoilee:
                         if case_xy.est_minee:
                             car = 'M'
                         else:
