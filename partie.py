@@ -38,12 +38,12 @@ class Partie():
         Une fois la partie terminée, on affiche le tableau de cases complètement dévoilée
         et on indique un message sur l'issue de la partie (victoire ou défaite).
         """
+
+        dimension_rangee = int(input('Entrez le nombre de lignes : '))
+        dimension_colonne = int(input('Entrez le nombre de colonnes : '))
+        nombre_mines = int(input('Entrez le nombre de mines : '))
         
-        ### TODO: Modifier le code pour demander à l'utilisateur de choisir la taille
-        ### du tableau (nombre de lignes et nombres de colonnes, ainsi que le nombre 
-        ### de mines)     
-        
-        self.tableau_mines = Tableau()
+        self.tableau_mines = Tableau(dimension_rangee,dimension_colonne,nombre_mines)
         
         compteur_tours = 0
         while not self.partie_terminee:

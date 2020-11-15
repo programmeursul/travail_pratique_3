@@ -134,7 +134,7 @@ class Tableau():
                 coordonnees_liste = coordonnees_liste + (coordonnees,)
                 self.dictionnaire_cases[coordonnees].ajouter_mine()
                 voisins = self.obtenir_voisins(rangee_aleatoire_x, colonne_aleatoire_y)
-                compte_mines = compte_mines + 1
+                compte_mines += 1
                 for voisin in voisins:
                     self.dictionnaire_cases[voisin].ajouter_une_mine_voisine()
             
