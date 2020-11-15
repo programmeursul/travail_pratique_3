@@ -105,7 +105,8 @@ class Tableau():
             rangee_voisin_x = rangee_x + voisin[0]
             colonne_voisin_y = colonne_y + voisin[1]
             if rangee_voisin_x > 0 and colonne_voisin_y > 0:
-                liste_coordonnees_cases_voisines.append((rangee_voisin_x,colonne_voisin_y))
+                if rangee_voisin_x <= self.dimension_rangee and colonne_voisin_y <= self.dimension_colonne:
+                    liste_coordonnees_cases_voisines.append((rangee_voisin_x,colonne_voisin_y))
         return liste_coordonnees_cases_voisines
 
     def initialiser_tableau(self):
@@ -122,11 +123,21 @@ class Tableau():
             for colonne_y in range(1, self.dimension_colonne+1):
                 coordonnees = (rangee_x, colonne_y)
                 self.dictionnaire_cases[coordonnees] = Case()
-        
-        # TODO: À compléter (étape 2)
-        # Nous vous suggérons d'utiliser dans la fonction randint(a,b) du module random qui 
-        # retourne un entier aléatoire compris entre a et b inclusivement.
-    
+
+        compte_mines = 0
+        coordonnees_liste = ()
+        while compte_mines < self.nombre_mines:
+            rangee_aleatoire_x = randint(1,self.dimension_rangee)
+            colonne_aleatoire_y = randint(1,self.dimension_colonne)
+            coordonnees = (rangee_aleatoire_x, colonne_aleatoire_y)
+            if coordonnees not in coordonnees_liste:
+                coordonnees_liste = coordonnees_liste + (coordonnees,)
+                self.dictionnaire_cases[coordonnees].ajouter_mine()
+                compte_mines = compte_mines + 1
+                voisins = self.obtenir_voisins(rangee_aleatoire_x, colonne_aleatoire_y)
+                for voisin in voisins:
+                    self.dictionnaire_cases[voisin].ajouter_une_mine_voisine()
+            
     def valider_coordonnees_a_devoiler(self, rangee_x, colonne_y):
         """
         Valide que les coordonnées reçues en argument sont celles d'une case que l'on peut dévoiler 
@@ -141,8 +152,12 @@ class Tableau():
                   case a déjà été dévoilée ou que les coordonnées ne dont pas valides).
         """  
         # TODO: À compléter
-        pass
-        
+        case_xy = self.obtenir_case(rangee_x, colonne_y)
+        if not case_xy.est_devoilee:
+            return True
+        else:
+            return False
+            
     def afficher_solution(self):
         """
         Méthode qui affiche le tableau de la solution à l'écran. La solution montre les 
@@ -265,7 +280,6 @@ class Tableau():
             voisins = self.obtenir_voisins(rangee_x,colonne_y)
             for case_voisin in voisins:
                 self.devoiler_case(case_voisin[0],case_voisin[1])
-
         
     def contient_mine(self, rangee_x, colonne_y):
         """
@@ -313,17 +327,20 @@ def test_obtenir_voisins():
     
     assert tableau_test.obtenir_voisins(1,1) == [(1, 2), (2, 1), (2, 2)]
 
-    
 def test_valider_coordonnees_a_devoiler():
-    # TODO: À compléter. 
-    pass
-    
+    # TODO: À compléter.
+    # pass
+    tableau_test = Tableau()
+
+    assert tableau_test.valider_coordonnees_a_devoiler(1,1)
+
 def test_devoiler_case():
     # TODO: À compléter. 
     pass
     
 def test_case_contient_mine():
-    # TODO: À compléter. 
+    # TODO: À compléter. Marc-Antoni, vous puvez faire un case avec mine et autre
+    # qui ne contient pas de mine.
     pass
 
 
