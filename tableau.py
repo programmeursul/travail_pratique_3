@@ -133,8 +133,8 @@ class Tableau():
             if coordonnees not in coordonnees_liste:
                 coordonnees_liste = coordonnees_liste + (coordonnees,)
                 self.dictionnaire_cases[coordonnees].ajouter_mine()
-                compte_mines = compte_mines + 1
                 voisins = self.obtenir_voisins(rangee_aleatoire_x, colonne_aleatoire_y)
+                compte_mines = compte_mines + 1
                 for voisin in voisins:
                     self.dictionnaire_cases[voisin].ajouter_une_mine_voisine()
             
@@ -151,7 +151,7 @@ class Tableau():
             bool: True si la case à ces coordonnées (x, y) peut être dévoilée, False autrement (donc si la
                   case a déjà été dévoilée ou que les coordonnées ne dont pas valides).
         """  
-        # TODO: À compléter
+        # TODO: À compléter. Il faut que je fasse la méthode valider_coordonnees
         case_xy = self.obtenir_case(rangee_x, colonne_y)
         if not case_xy.est_devoilee:
             return True
@@ -339,7 +339,7 @@ def test_devoiler_case():
     pass
     
 def test_case_contient_mine():
-    # TODO: À compléter. Marc-Antoni, vous puvez faire un case avec mine et autre
+    # TODO: À compléter. Marc-Antoine, vous puvez faire un case avec mine et autre
     # qui ne contient pas de mine.
     pass
 
@@ -363,6 +363,3 @@ if __name__ == '__main__':
     test_devoiler_case()
     test_case_contient_mine()
     print('Tests réussis!')
-
-
-    
