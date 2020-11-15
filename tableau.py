@@ -101,8 +101,11 @@ class Tableau():
 
         liste_coordonnees_cases_voisines = []
 
-        # TODO: Générer la liste des coordonnées valides des cases voisine. Le tuple voisinage est là pour vous aider.
-
+        for voisin in voisinage:
+            rangee_voisin_x = rangee_x + voisin[0]
+            colonne_voisin_y = colonne_y + voisin[1]
+            if rangee_voisin_x > 0 and colonne_voisin_y > 0:
+                liste_coordonnees_cases_voisines.append((rangee_voisin_x,colonne_voisin_y))
         return liste_coordonnees_cases_voisines
 
     def initialiser_tableau(self):
@@ -236,8 +239,11 @@ class Tableau():
             bool: True s'il reste des cases à dévoiler, False autrement.
 
         """
-        # TODO: À compléter
-        pass
+        for rangee in range(1,self.dimension_rangee+1):
+            for colonne in range(1,self.dimension_colonne+1):
+                case_xy = self.obtenir_case(rangee,colonne)
+                if not case_xy.est_devoilee:
+                    return True
 
     def devoiler_case(self, rangee_x, colonne_y):
         """
@@ -256,7 +262,7 @@ class Tableau():
         if not self.contient_mine(rangee_x, colonne_y):
             self.nombre_cases_sans_mine_a_devoiler -= 1
         elif case_xy.nombre_mines_voisines == 0:
-            voisins = obtenir_voisins(rangee_x,colonne_y)
+            voisins = self.obtenir_voisins(rangee_x,colonne_y)
             for case_voisin in voisins:
                 self.devoiler_case(case_voisin[0],case_voisin[1])
 
@@ -272,10 +278,8 @@ class Tableau():
         Returns:
             bool: True si la case à ces coordonnées (x, y) contient une mine, False autrement.
         """
-        # TODO: À compléter   
-        pass
-
-
+        case_xy = self.obtenir_case(rangee_x,colonne_y)        
+        return case_xy.est_minee
 
 #### Tests unitaires (à compléter) ###
 
@@ -298,8 +302,17 @@ def test_valider_coordonnees():
     assert not tableau_test.valider_coordonnees(0, 0)
     
 def test_obtenir_voisins():
-    # TODO: À compléter. 
-    pass
+    # TODO: À compléter. Marc-Antoine, j'ai fait seulement un test : case(1,1).
+    # Vous pouvez faire pour les autres cas : 
+    #        (1,2), (1,3), (1,4), (1,5)
+    # (2,1), (2,2), (2,3), (2,4), (2,5)
+    # (3,1), (3,2), (3,3), (3,4), (3,5)
+    # (4,1), (4,2), (4,3), (4,4), (4,5)
+    # (5,1), (5,2), (5,3), (5,4), (5,5)
+    tableau_test = Tableau()
+    
+    assert tableau_test.obtenir_voisins(1,1) == [(1, 2), (2, 1), (2, 2)]
+
     
 def test_valider_coordonnees_a_devoiler():
     # TODO: À compléter. 
