@@ -101,12 +101,8 @@ class Tableau():
 
         liste_coordonnees_cases_voisines = []
 
-        for voisin in voisinage:
-            rangee_voisin_x = rangee_x + voisin[0]
-            colonne_voisin_y = colonne_y + voisin[1]
-            if rangee_voisin_x > 0 and colonne_voisin_y > 0:
-                if rangee_voisin_x <= self.dimension_rangee and colonne_voisin_y <= self.dimension_colonne:
-                    liste_coordonnees_cases_voisines.append((rangee_voisin_x,colonne_voisin_y))
+        # TODO: Générer la liste des coordonnées valides des cases voisine. Le tuple voisinage est là pour vous aider.
+
         return liste_coordonnees_cases_voisines
 
     def initialiser_tableau(self):
@@ -123,21 +119,11 @@ class Tableau():
             for colonne_y in range(1, self.dimension_colonne+1):
                 coordonnees = (rangee_x, colonne_y)
                 self.dictionnaire_cases[coordonnees] = Case()
-
-        compte_mines = 0
-        coordonnees_liste = ()
-        while compte_mines < self.nombre_mines:
-            rangee_aleatoire_x = randint(1,self.dimension_rangee)
-            colonne_aleatoire_y = randint(1,self.dimension_colonne)
-            coordonnees = (rangee_aleatoire_x, colonne_aleatoire_y)
-            if coordonnees not in coordonnees_liste:
-                coordonnees_liste = coordonnees_liste + (coordonnees,)
-                self.dictionnaire_cases[coordonnees].ajouter_mine()
-                voisins = self.obtenir_voisins(rangee_aleatoire_x, colonne_aleatoire_y)
-                compte_mines += 1
-                for voisin in voisins:
-                    self.dictionnaire_cases[voisin].ajouter_une_mine_voisine()
-            
+        
+        # TODO: À compléter (étape 2)
+        # Nous vous suggérons d'utiliser dans la fonction randint(a,b) du module random qui 
+        # retourne un entier aléatoire compris entre a et b inclusivement.
+    
     def valider_coordonnees_a_devoiler(self, rangee_x, colonne_y):
         """
         Valide que les coordonnées reçues en argument sont celles d'une case que l'on peut dévoiler 
@@ -151,13 +137,9 @@ class Tableau():
             bool: True si la case à ces coordonnées (x, y) peut être dévoilée, False autrement (donc si la
                   case a déjà été dévoilée ou que les coordonnées ne dont pas valides).
         """  
-        # TODO: À compléter. Il faut que je fasse la méthode valider_coordonnees
-        case_xy = self.obtenir_case(rangee_x, colonne_y)
-        if not case_xy.est_devoilee:
-            return True
-        else:
-            return False
-            
+        # TODO: À compléter
+        pass
+        
     def afficher_solution(self):
         """
         Méthode qui affiche le tableau de la solution à l'écran. La solution montre les 
@@ -254,11 +236,8 @@ class Tableau():
             bool: True s'il reste des cases à dévoiler, False autrement.
 
         """
-        for rangee in range(1,self.dimension_rangee+1):
-            for colonne in range(1,self.dimension_colonne+1):
-                case_xy = self.obtenir_case(rangee,colonne)
-                if not case_xy.est_devoilee:
-                    return True
+        # TODO: À compléter
+        pass
 
     def devoiler_case(self, rangee_x, colonne_y):
         """
@@ -277,9 +256,10 @@ class Tableau():
         if not self.contient_mine(rangee_x, colonne_y):
             self.nombre_cases_sans_mine_a_devoiler -= 1
         elif case_xy.nombre_mines_voisines == 0:
-            voisins = self.obtenir_voisins(rangee_x,colonne_y)
+            voisins = obtenir_voisins(rangee_x,colonne_y)
             for case_voisin in voisins:
                 self.devoiler_case(case_voisin[0],case_voisin[1])
+
         
     def contient_mine(self, rangee_x, colonne_y):
         """
@@ -292,8 +272,10 @@ class Tableau():
         Returns:
             bool: True si la case à ces coordonnées (x, y) contient une mine, False autrement.
         """
-        case_xy = self.obtenir_case(rangee_x,colonne_y)        
-        return case_xy.est_minee
+        # TODO: À compléter   
+        pass
+
+
 
 #### Tests unitaires (à compléter) ###
 
@@ -316,51 +298,21 @@ def test_valider_coordonnees():
     assert not tableau_test.valider_coordonnees(0, 0)
     
 def test_obtenir_voisins():
-    # TODO: À compléter. Marc-Antoine, j'ai fait seulement un test : case(1,1).
-    # Vous pouvez faire pour les autres cas : 
-    #        (1,2), (1,3), (1,4), (1,5)
-    # (2,1), (2,2), (2,3), (2,4), (2,5)
-    # (3,1), (3,2), (3,3), (3,4), (3,5)
-    # (4,1), (4,2), (4,3), (4,4), (4,5)
-    # (5,1), (5,2), (5,3), (5,4), (5,5)
-    tableau_test = Tableau()
+    # TODO: À compléter. 
+    pass
     
-    assert tableau_test.obtenir_voisins(1, 1) == [(1, 2), (2, 1), (2, 2)]
-    assert tableau_test.obtenir_voisins(1, 3) == [(1, 2), (1, 4), (2, 2),(2, 3),(2, 4)]
-    assert tableau_test.obtenir_voisins(1, 5) == [(1, 4), (2, 4), (2, 5)]
-    assert tableau_test.obtenir_voisins(5, 5) == [(4, 4), (4, 5), (5, 4)]
-    assert tableau_test.obtenir_voisins(3, 3) == [(2, 2), (2, 3), (2, 4), (3, 2), (3, 4), (4, 4), (4, 3), (4, 2)]
-
 def test_valider_coordonnees_a_devoiler():
-    # TODO: À compléter.
-    # pass
-    tableau_test = Tableau()
-    tableau_test.initialiser_tableau()
-    case_1 = tableau_test.obtenir_case(1, 1)
-    case_1.devoiler()
-    case_2 = tableau_test.obtenir_case(3, 2)
-    case_2.devoiler()
-
-
-    assert not tableau_test.valider_coordonnees_a_devoiler(1,1)
-    assert not tableau_test.valider_coordonnees_a_devoiler(3,2)
-    assert tableau_test.valider_coordonnees_a_devoiler(3,3)
-    assert not tableau_test.valider_coordonnees_a_devoiler(100,100)
-
+    # TODO: À compléter. 
+    pass
+    
 def test_devoiler_case():
     # TODO: À compléter. 
     pass
     
 def test_case_contient_mine():
+    # TODO: À compléter. 
+    pass
 
-    tableau_test = Tableau()
-    tableau_test.initialiser_tableau()
-    case_1 = tableau_test.obtenir_case(1, 1)
-    case_1.est_minee = True
-    case_2 = tableau_test.obtenir_case(3, 2)
-    case_2.est_minee = False
-    assert tableau_test.contient_mine(1,1)
-    assert not tableau_test.contient_mine(3,2)
 
 if __name__ == '__main__':
 

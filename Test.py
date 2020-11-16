@@ -1,2 +1,4 @@
-t1 = [(3,4),(5,6)]
-print(t1[1])
+import tableau
+
+x = tTbleau
+x.afficher_tableau()
