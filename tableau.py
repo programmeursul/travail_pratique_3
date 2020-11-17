@@ -325,16 +325,19 @@ def test_obtenir_voisins():
     # (5,1), (5,2), (5,3), (5,4), (5,5)
     tableau_test = Tableau()
     
+
     assert tableau_test.obtenir_voisins(1, 1) == [(1, 2), (2, 1), (2, 2)]
     assert tableau_test.obtenir_voisins(1, 3) == [(1, 2), (1, 4), (2, 2),(2, 3),(2, 4)]
     assert tableau_test.obtenir_voisins(1, 5) == [(1, 4), (2, 4), (2, 5)]
     assert tableau_test.obtenir_voisins(5, 5) == [(4, 4), (4, 5), (5, 4)]
     assert tableau_test.obtenir_voisins(3, 3) == [(2, 2), (2, 3), (2, 4), (3, 2), (3, 4), (4, 4), (4, 3), (4, 2)]
 
+
 def test_valider_coordonnees_a_devoiler():
     # TODO: À compléter.
     # pass
     tableau_test = Tableau()
+
     tableau_test.initialiser_tableau()
     case_1 = tableau_test.obtenir_case(1, 1)
     case_1.devoiler()
@@ -347,11 +350,17 @@ def test_valider_coordonnees_a_devoiler():
     assert tableau_test.valider_coordonnees_a_devoiler(3,3)
     assert not tableau_test.valider_coordonnees_a_devoiler(100,100)
 
+
 def test_devoiler_case():
     # TODO: À compléter. 
     pass
     
 def test_case_contient_mine():
+
+    # TODO: À compléter. Marc-Antoine, vous puvez faire un case avec mine et autre
+    # qui ne contient pas de mine.
+
+
 
     tableau_test = Tableau()
     tableau_test.initialiser_tableau()

@@ -329,7 +329,7 @@ def test_obtenir_voisins():
     assert tableau_test.obtenir_voisins(1, 3) == [(1, 2), (1, 4), (2, 2),(2, 3),(2, 4)]
     assert tableau_test.obtenir_voisins(1, 5) == [(1, 4), (2, 4), (2, 5)]
     assert tableau_test.obtenir_voisins(5, 5) == [(4, 4), (4, 5), (5, 4)]
-    assert tableau_test.obtenir_voisins(3, 3) == [(2, 2), (2, 3), (2, 4), (3, 2), (3, 4), (4, 4), (4, 3), (4, 2)]
+    assert tableau_test.obtenir_voisins(3, 3) == [(2, 2), (2, 3), (2, 4), (3, 2), (3, 4), (4, 2), (4, 3), (4, 4)]
 
 def test_valider_coordonnees_a_devoiler():
     # TODO: À compléter.
