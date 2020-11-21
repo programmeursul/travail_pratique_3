@@ -131,9 +131,7 @@ class Partie():
             int: Numéro de la rangée
             int: Numéro de la colonne
 
-        """ 
-        # TODO: À programmer.
-
+        """
         rangee = input('Entrez le numéro de ligne : ')
         colonne = input('Entrez le numéro de colonne : ')
 
