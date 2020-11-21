@@ -9,7 +9,6 @@ Auteurs: à compléter
 
 from tableau import Tableau
 
-
 class Partie():
     """
     Contient les informations sur une partie du jeu Démineur, qui se jouera avec
@@ -96,9 +95,31 @@ class Partie():
         Returns:
             bool : True si les coordonnées sont valides, False autrement.
         """
-        # TODO: À programmer.
-        pass
-    
+        valid = True
+        # Vérifier si les coordonnées sont des caractères numériques
+        if not (rangee_x.isnumeric() and colonne_y.isnumeric()):
+            valid = False
+        else:
+        # Vérifier si les coordonnées sont à l'intérieur des valeurs possibles
+        # des rangées et des colonnes du tableau
+            rangee_x = int(rangee_x)
+            colonne_y = int(colonne_y)
+            if not self.tableau_mines.valider_coordonnees(rangee_x, colonne_y):
+                valid = False
+            else:
+        # Vérifier si la case correspondre à une case qui n'a pas encore été
+        # dévoilée
+                case_xy = self.tableau_mines.obtenir_case(rangee_x, colonne_y)
+                if case_xy.est_devoilee:
+                    valid = False
+        
+        # Retourne le résultat
+        if not valid:
+            print('Coordonnées non valides. Recommencez!')
+            return False
+        else:
+            return True
+            
     def demander_coordonnees_case_a_devoiler(self):
         """
         Méthode qui demande à l'utilisateur d'entrer la coordonnée de la case qu'il veut dévoiler.
@@ -113,9 +134,11 @@ class Partie():
         """ 
         # TODO: À programmer.
 
-        rangee, colonne = input('Entrer les coordonées (X_entier,Y_entier) de la case à dévoiler : ')
+        rangee = input('Entrez le numéro de ligne : ')
+        colonne = input('Entrez le numéro de colonne : ')
 
         while not self.valider_coordonnees(rangee, colonne):
-            rangee, colonne = input('Les cordonnées entrée ne sont pas valides! \n Entrer les coordonées de la case à dévoiler : ')
+            rangee = input('Entrez le numéro de ligne : ')
+            colonne = input('Entrez le numéro de colonne : ')
         return int(rangee), int(colonne)
 

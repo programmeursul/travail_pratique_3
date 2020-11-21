@@ -316,26 +316,15 @@ def test_valider_coordonnees():
     assert not tableau_test.valider_coordonnees(0, 0)
     
 def test_obtenir_voisins():
-    # TODO: À compléter. Marc-Antoine, j'ai fait seulement un test : case(1,1).
-    # Vous pouvez faire pour les autres cas : 
-    #        (1,2), (1,3), (1,4), (1,5)
-    # (2,1), (2,2), (2,3), (2,4), (2,5)
-    # (3,1), (3,2), (3,3), (3,4), (3,5)
-    # (4,1), (4,2), (4,3), (4,4), (4,5)
-    # (5,1), (5,2), (5,3), (5,4), (5,5)
-    tableau_test = Tableau()
-    
+    tableau_test = Tableau()    
 
     assert tableau_test.obtenir_voisins(1, 1) == [(1, 2), (2, 1), (2, 2)]
     assert tableau_test.obtenir_voisins(1, 3) == [(1, 2), (1, 4), (2, 2),(2, 3),(2, 4)]
     assert tableau_test.obtenir_voisins(1, 5) == [(1, 4), (2, 4), (2, 5)]
     assert tableau_test.obtenir_voisins(5, 5) == [(4, 4), (4, 5), (5, 4)]
-    assert tableau_test.obtenir_voisins(3, 3) == [(2, 2), (2, 3), (2, 4), (3, 2), (3, 4), (4, 4), (4, 3), (4, 2)]
-
+    assert tableau_test.obtenir_voisins(3, 3) == [(2, 2), (2, 3), (2, 4), (3, 2), (3, 4), (4, 2), (4, 3), (4, 4)]
 
 def test_valider_coordonnees_a_devoiler():
-    # TODO: À compléter.
-    # pass
     tableau_test = Tableau()
 
     tableau_test.initialiser_tableau()
@@ -344,13 +333,10 @@ def test_valider_coordonnees_a_devoiler():
     case_2 = tableau_test.obtenir_case(3, 2)
     case_2.devoiler()
 
-
     assert not tableau_test.valider_coordonnees_a_devoiler(1,1)
     assert not tableau_test.valider_coordonnees_a_devoiler(3,2)
     assert tableau_test.valider_coordonnees_a_devoiler(3,3)
-    assert not tableau_test.valider_coordonnees_a_devoiler(100,100)
-
-
+    
 def test_devoiler_case():
     # TODO: À compléter. 
     pass
