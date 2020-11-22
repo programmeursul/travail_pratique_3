@@ -280,6 +280,7 @@ class Tableau():
         if case_xy.nombre_mines_voisines == 0:
             voisins = self.obtenir_voisins(rangee_x,colonne_y)
             for case_voisin in voisins:
+                self.nombre_cases_sans_mine_a_devoiler -= 1
                 case_xy = self.obtenir_case(case_voisin[0], case_voisin[1])
                 case_xy.devoiler()
 
