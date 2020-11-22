@@ -52,9 +52,11 @@ class Partie():
             self.tour()
             
         self.tableau_mines.afficher_solution()
-        
-        # TODO: Afficher le message de victoire ou de défaite
-               
+        if self.partie_terminee and self.tableau_mines.nombre_cases_sans_mine_a_devoiler == 0:
+            print('\nVictoire!')
+        elif self.partie_terminee and self.tableau_mines.contient_cases_a_devoiler():
+            print('\nDéfaite!')
+
     def tour(self):
         """ 
         Jouer un tour, c'est-à-dire:

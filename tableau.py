@@ -259,6 +259,7 @@ class Tableau():
                 case_xy = self.obtenir_case(rangee,colonne)
                 if not case_xy.est_devoilee:
                     return True
+        return False
 
     def devoiler_case(self, rangee_x, colonne_y):
         """
@@ -342,18 +343,14 @@ def test_devoiler_case():
     pass
     
 def test_case_contient_mine():
-
-    # TODO: À compléter. Marc-Antoine, vous puvez faire un case avec mine et autre
-    # qui ne contient pas de mine.
-
-
-
     tableau_test = Tableau()
+    
     tableau_test.initialiser_tableau()
     case_1 = tableau_test.obtenir_case(1, 1)
     case_1.est_minee = True
     case_2 = tableau_test.obtenir_case(3, 2)
     case_2.est_minee = False
+
     assert tableau_test.contient_mine(1,1)
     assert not tableau_test.contient_mine(3,2)
 
