@@ -151,10 +151,12 @@ class Tableau():
             bool: True si la case à ces coordonnées (x, y) peut être dévoilée, False autrement (donc si la
                   case a déjà été dévoilée ou que les coordonnées ne dont pas valides).
         """  
-        # TODO: À compléter. Il faut que je fasse la méthode valider_coordonnees
-        case_xy = self.obtenir_case(rangee_x, colonne_y)
-        if not case_xy.est_devoilee:
-            return True
+        if self.valider_coordonnees(rangee_x,colonne_y):
+            case_xy = self.obtenir_case(rangee_x, colonne_y)
+            if not case_xy.est_devoilee:
+                return True
+            else:
+                return False
         else:
             return False
             
@@ -205,8 +207,6 @@ class Tableau():
         Méthode qui affiche le tableau à l'écran. Le tableau montre le contenu des cases dévoilées 
         (mine ou nombre de mines voisines) ou un point pour les cases non dévoilées.
         """
-        # TODO: À compléter
-
         print()  # Retour de ligne
 
         for rangee_x in range(0, self.dimension_rangee + 1):
@@ -243,8 +243,6 @@ class Tableau():
             if rangee_x == 0:  # Ligne horizontale de l'en-tête
                 print('--+-' + '--' * self.dimension_colonne)
 
-
-
     def contient_cases_a_devoiler(self):
         """
         Méthode qui indique si le tableau contient des cases à dévoiler.
@@ -270,7 +268,6 @@ class Tableau():
             rangee_x (int) : Numéro de la rangée de la case à dévoiler
             colonne_y (int): Numéro de la colonne de la case à dévoiler
         """
-        # TODO: À compléter
         case_xy = self.obtenir_case(rangee_x, colonne_y)
         case_xy.devoiler()
 
@@ -283,9 +280,6 @@ class Tableau():
                 if not case_xy.est_devoilee:
                     self.nombre_cases_sans_mine_a_devoiler -= 1
                     case_xy.devoiler()
-        print(self.nombre_cases_sans_mine_a_devoiler)
-
-
         
     def contient_mine(self, rangee_x, colonne_y):
         """
@@ -311,7 +305,6 @@ def test_initialisation():
         tableau_test.dimension_rangee - tableau_test.nombre_mines
 
 def test_valider_coordonnees():
-
     tableau_test = Tableau()
     dimension_x, dimension_y = tableau_test.dimension_rangee, tableau_test.dimension_colonne
 
@@ -342,10 +335,19 @@ def test_valider_coordonnees_a_devoiler():
     assert not tableau_test.valider_coordonnees_a_devoiler(1,1)
     assert not tableau_test.valider_coordonnees_a_devoiler(3,2)
     assert tableau_test.valider_coordonnees_a_devoiler(3,3)
+    assert not tableau_test.valider_coordonnees_a_devoiler(3,6)
     
 def test_devoiler_case():
-    # TODO: À compléter. 
-    pass
+    print('\ntest_devoiler_case:')
+    tableau_test = Tableau()
+
+    tableau_test.initialiser_tableau()
+    case_1 = tableau_test.obtenir_case(1, 1)
+    case_1.est_minee = False
+    
+    tableau_test.devoiler_case(1,1)
+    print('\nAfficher tableau -> test_devoiler_case:')
+    tableau_test.afficher_tableau()
     
 def test_case_contient_mine():
     tableau_test = Tableau()
@@ -361,7 +363,7 @@ def test_case_contient_mine():
 
 if __name__ == '__main__':
 
-    # CLes cinq prochaines lignes de code sont là pour vous aider à tester votre 
+    # Cles cinq prochaines lignes de code sont là pour vous aider à tester votre 
     # première tentative d'implémentation des méthodes initialiser_tableau et afficher_tableau.
     
     tableau_test = Tableau()

@@ -37,7 +37,6 @@ class Partie():
         Une fois la partie terminée, on affiche le tableau de cases complètement dévoilée
         et on indique un message sur l'issue de la partie (victoire ou défaite).
         """
-
         dimension_rangee = int(input('Entrez le nombre de lignes : '))
         dimension_colonne = int(input('Entrez le nombre de colonnes : '))
         nombre_mines = int(input('Entrez le nombre de mines : '))
@@ -69,7 +68,6 @@ class Partie():
             - On détecte si toutes les cases ont été dévoilées, 
               auquel cas affecte True à l'attribut self.partie_terminee.
         """
-        # TODO: À programmer.
         # On demande les coordonnée et on dévoile la case
         rangee_x, colonne_y = self.demander_coordonnees_case_a_devoiler()
         self.tableau_mines.devoiler_case(rangee_x, colonne_y)
@@ -141,4 +139,3 @@ class Partie():
             rangee = input('Entrez le numéro de ligne : ')
             colonne = input('Entrez le numéro de colonne : ')
         return int(rangee), int(colonne)
-
