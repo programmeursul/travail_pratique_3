@@ -244,7 +244,6 @@ class Tableau():
                 print('--+-' + '--' * self.dimension_colonne)
 
 
-    pass
 
     def contient_cases_a_devoiler(self):
         """
@@ -280,9 +279,12 @@ class Tableau():
         if case_xy.nombre_mines_voisines == 0:
             voisins = self.obtenir_voisins(rangee_x,colonne_y)
             for case_voisin in voisins:
-                self.nombre_cases_sans_mine_a_devoiler -= 1
                 case_xy = self.obtenir_case(case_voisin[0], case_voisin[1])
-                case_xy.devoiler()
+                if not case_xy.est_devoilee:
+                    self.nombre_cases_sans_mine_a_devoiler -= 1
+                    case_xy.devoiler()
+        print(self.nombre_cases_sans_mine_a_devoiler)
+
 
         
     def contient_mine(self, rangee_x, colonne_y):
